@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: postgres-configmap
+data:
+    postgres-host: postgres-service:5432
+    postgres-dbname: api

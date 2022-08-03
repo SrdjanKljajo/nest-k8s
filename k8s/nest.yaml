@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node
+  labels:
+    app: node
+spec:
+  replicas: 8
+  selector:
+    matchLabels:
+      app: node 
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+      - name: node
+        image: srdjankljajo/nest-kubernetes
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5001
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-password
+        - name: POSTGRES_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-configmap
+              key: postgres-host
+        - name: POSTGRES_DBNAME
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-configmap
+              key: postgres-dbname
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-service
+spec:
+  selector:
+    app: node
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001
