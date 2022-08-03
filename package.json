@@ -6,9 +6,6 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "docker:rm": "docker-compose  -f docker-compose.yml -f docker-compose.dev.yml rm -s -f -v",
-    "docker:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build",
-    "docker:test": "docker-compose --env-file .env.test -f docker-compose.e2e.yml up --build --abort-on-container-exit --exit-code-from nest_api_test",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
