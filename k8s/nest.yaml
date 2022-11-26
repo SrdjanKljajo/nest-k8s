@@ -17,30 +17,12 @@ spec:
       containers:
       - name: node
         image: srdjankljajo/k8s_nest_pg:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 5001
         env:
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: postgres-user
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: postgres-password
-        - name: POSTGRES_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: postgres-configmap
-              key: postgres-host
-        - name: POSTGRES_DBNAME
-          valueFrom:
-            configMapKeyRef:
-              name: postgres-configmap
-              key: postgres-dbname
+        - name: DATABASE_URL
+          value: '$(DATABASE_URL)'
         
 ---
 apiVersion: v1
