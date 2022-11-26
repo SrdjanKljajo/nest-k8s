@@ -3,7 +3,7 @@ name: Push to Docker Hub
 on:
   push:
     branches:
-      - 'test'
+      - 'main'
 
 jobs:
   docker:
@@ -25,4 +25,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: srdjankljajo/nest-k8s:latest
+          tags: srdjankljajo/k8s_nest_pg:latest
