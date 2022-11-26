@@ -120,26 +120,6 @@ describe('App e2e', () => {
           .expectStatus(200);
       });
     });
-    describe('Edit user', () => {
-      it('should edit user', () => {
-        const dto: EditUserDto = {
-          firstName: 'Srkica',
-          lastName: 'Kljajo',
-          email: 'srki@gmail.com',
-        };
-        return pactum
-          .spec()
-          .patch('/users')
-          .withHeaders({
-            Authorization: 'Bearer $S{userAt}',
-          })
-          .withBody(dto)
-          .expectStatus(200)
-          .expectBodyContains(dto.firstName)
-          .expectBodyContains(dto.lastName)
-          .expectBodyContains(dto.email);
-      });
-    });
   });
   describe('Bookmarks', () => {
     describe('Get empty bookmarks', () => {
