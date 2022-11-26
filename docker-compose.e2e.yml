@@ -7,7 +7,7 @@ services:
      context: .
      target: development
     ports:
-      - 4444:4444
+      - 5001:5001
     command: npm run start:migrate:test
     env_file:
       - .env.test

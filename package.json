@@ -22,7 +22,7 @@
     "timeout": "node -e \"require('node:timers/promises').setTimeout(15_000)\"",
     "start:migrate:prod": "prisma migrate deploy && npm run timeout && npm run start:prod",
     "start:migrate:dev": "prisma migrate deploy && npm run timeout && npm run start:dev",
-    "docker:test": "docker-compose --env-file .env.test -f docker-compose.e2e.yml up --build --abort-on-container-exit --exit-code-from nest_api_test",
+    "docker:test": "docker-compose dotenv -e .env.test -f docker-compose.e2e.yml up --build --abort-on-container-exit --exit-code-from nest_api_test",
     "start:migrate:test": "dotenv -e .env.test -- npx prisma migrate dev && npm run test:e2e"
   },
   "dependencies": {
