@@ -9,8 +9,8 @@ services:
     ports:
       - 5001:5001
     command: npm run start:migrate:test
-    environment: 
-      DATABASE_URL: 'postgresql://postgres:srdjan23@test_db:5432/nest?schema=public'
+    env_file:
+      - .env.test
     depends_on:
       - test_db
     networks:
@@ -21,10 +21,8 @@ services:
     restart: always
     ports:
       - 5432:5432
-    environment: 
-      POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: 'srdjan23'
-      POSTGRES_DB: 'nest'
+    env_file:
+      - .env.test
     volumes:
       - db_data:/var/lib/postgresql/data   
     networks:
