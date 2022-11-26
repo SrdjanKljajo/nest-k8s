@@ -58,7 +58,7 @@ export class BookmarkService {
     });
 
     // check if user owns the bookmark
-    if (!bookmark) throw new ForbiddenException('Not found');
+    if (!bookmark) throw new ForbiddenException('Bookmark Not Found');
 
     await this.prisma.bookmark.delete({
       where: {
