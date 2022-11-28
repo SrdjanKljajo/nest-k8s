@@ -6,8 +6,12 @@ import { CreateBookmarkDto, EditBookmarkDto } from './dto';
 export class BookmarkService {
   constructor(private prisma: PrismaService) {}
 
-  getBookmarks() {
-    return this.prisma.bookmark.findMany({});
+  getBookmarks(userId: number) {
+    return this.prisma.bookmark.findMany({
+      where: {
+        userId,
+      },
+    });
   }
 
   getBookmark(bookmarkId: number) {

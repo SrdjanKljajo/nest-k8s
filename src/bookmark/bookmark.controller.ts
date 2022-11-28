@@ -1,5 +1,6 @@
 import {
   Body,
+  CacheKey,
   Controller,
   Delete,
   Get,
@@ -16,12 +17,14 @@ import { JwtGuard } from '../auth/guard';
 import { BookmarkService } from './bookmark.service';
 import { CreateBookmarkDto, EditBookmarkDto } from './dto';
 
+@UseGuards(JwtGuard)
 @Controller('bookmarks')
 export class BookmarkController {
   constructor(private bookmarkService: BookmarkService) {}
   @Get()
-  getBookmarks() {
-    return this.bookmarkService.getBookmarks();
+  @CacheKey('bookmarks')
+  getBookmarks(@GetUser('id') userId: number) {
+    return this.bookmarkService.getBookmarks(userId);
   }
 
   @Get(':id')
