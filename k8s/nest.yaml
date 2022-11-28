@@ -16,11 +16,10 @@ spec:
     spec:
       containers:
       - name: node
-        image: srdjankljajo/k8s_nest_pg:l.0.3
-        imagePullPolicy: IfNotPresent
+        image: srdjankljajo/k8s_nest_pg:1.0.3
+        imagePullPolicy: Always
         ports:
         - containerPort: 5001
-        
         
 ---
 apiVersion: v1
