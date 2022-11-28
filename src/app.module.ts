@@ -26,10 +26,6 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
   controllers: [AppController],
   providers: [
     {
-      provide: APP_INTERCEPTOR,
-      useClass: CacheInterceptor,
-    },
-    {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
