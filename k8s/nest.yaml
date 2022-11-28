@@ -16,13 +16,11 @@ spec:
     spec:
       containers:
       - name: node
-        image: srdjankljajo/k8s_nest_pg:latest
-        imagePullPolicy: Always
+        image: srdjankljajo/k8s_nest_pg:1.0.1
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5001
-        env:
-        - name: DATABASE_URL
-          value: '$(DATABASE_URL)'
+        
         
 ---
 apiVersion: v1
