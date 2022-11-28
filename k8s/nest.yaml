@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: node
-        image: srdjankljajo/k8s_nest_pg:1.0.3
+        image: srdjankljajo/k8s_nest_pg:1.0.4
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5001
