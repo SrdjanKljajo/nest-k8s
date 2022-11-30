@@ -5,7 +5,7 @@ metadata:
 spec:
   serviceName: pgadmin-service
   podManagementPolicy: Parallel
-  replicas: 1
+  replicas: 3
   updateStrategy:
     type: RollingUpdate
   selector:

@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node
+  labels:
+    app: node
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node 
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+      - name: node
+        image: srdjankljajo/k8s_nest_pg:1.0.7
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5001
+        env:
+         - name: POSTGRES_USER
+           valueFrom:
+            secretKeyRef:
+              name: nest-secret
+              key: postgres-user
+         - name: POSTGRES_PASSWORD
+           valueFrom:
+            secretKeyRef:
+              name: nest-secret
+              key: postgres-password
+         - name: POSTGRES_DB
+           valueFrom:
+            secretKeyRef:
+              name: nest-secret
+              key: postgres-db
+         - name: JWT_SECRET
+           valueFrom:
+            secretKeyRef:
+              name: nest-secret
+              key: jwt-secret
+         - name: DATABASE_URL
+           value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres-service:5432/$(POSTGRES_DB)?schema=public
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-service
+spec:
+  selector:
+    app: node
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5001
