@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
  name: pgadmin-config
+ namespace: development
 data:
  servers.json: |
    {

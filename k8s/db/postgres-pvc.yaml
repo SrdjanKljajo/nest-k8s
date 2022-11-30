@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim # Create PVC
 metadata:
   name: postgres-volume-claim # Sets PVC's name
+  namespace: development
   labels:
     app: postgres # Defines app to create PVC for
 spec:
