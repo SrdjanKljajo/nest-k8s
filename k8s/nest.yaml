@@ -16,10 +16,13 @@ spec:
     spec:
       containers:
       - name: node
-        image: srdjankljajo/k8s_nest_pg:1.0.4
+        image: srdjankljajo/k8s_nest_pg:1.0.5
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5001
+        env:
+         - name: DATABASE_URL
+           value: postgresql://postgres:srdjan23@postgres-service:5432/api?schema=public
         
 ---
 apiVersion: v1
@@ -32,5 +35,5 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 5001
+      port: 80
       targetPort: 5001

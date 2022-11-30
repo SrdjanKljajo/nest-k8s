@@ -15,7 +15,7 @@ spec:
         app: redis
     spec:
       containers:
-      - name: tedis
+      - name: redis
         image: redis:latest
         ports:
         - containerPort: 6379
