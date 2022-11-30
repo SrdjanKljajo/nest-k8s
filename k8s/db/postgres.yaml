@@ -5,7 +5,7 @@ metadata:
   labels:
     app: postgres
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: postgres
@@ -30,16 +30,23 @@ spec:
             secretKeyRef:
               name: postgres-secret
               key: postgres-password
+        - name: POSTGRES_DBNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-db      
         - name: POSTGRES_HOST
           valueFrom:
             configMapKeyRef:
               name: postgres-configmap
               key: postgres-host
-        - name: POSTGRES_DBNAME
-          valueFrom:
-            configMapKeyRef:
-              name: postgres-configmap
-              key: postgres-dbname
+        volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdata
+      volumes:
+        - name: postgresdata
+          persistentVolumeClaim:
+            claimName: postgres-volume-claim      
 ---
 apiVersion: v1
 kind: Service
