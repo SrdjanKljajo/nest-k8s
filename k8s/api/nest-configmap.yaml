@@ -5,3 +5,4 @@ metadata:
     namespace: development
 data:
     postgres-host: postgres-service:5432
+    aws-region: eu-central-1

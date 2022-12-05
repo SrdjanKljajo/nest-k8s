@@ -25,4 +25,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: srdjankljajo/k8s_nest_pg:1.0.8
+          tags: srdjankljajo/k8s_nest_pg:1.0.9
