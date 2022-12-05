@@ -26,11 +26,20 @@ export class UserController {
     return user;
   }*/
 
+  getUsers() {
+    return this.userService.getUsers();
+  }
+
   @Patch('update/:id')
   editUser(
     @Param('id', ParseIntPipe) userId: number,
     @Body() dto: EditUserDto,
   ) {
     return this.userService.editUser(userId, dto);
+  }
+
+  @Get(':id/profile-img')
+  getUserProfilePicture(@GetUser('id') userId: number) {
+    return this.userService.getUserProfilePicture(userId);
   }
 }

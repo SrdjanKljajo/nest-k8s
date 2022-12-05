@@ -8,6 +8,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { redisStore } from 'cache-manager-redis-store';
 import { APP_INTERCEPTOR, APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
     AuthModule,
     UserModule,
     PrismaModule,
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [
