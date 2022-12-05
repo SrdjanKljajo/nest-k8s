@@ -3,10 +3,15 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
+import * as compression from 'compression';
+import helmet from 'helmet';
 import { config } from 'aws-sdk';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
+  app.use(compression());
+  app.use(helmet());
   app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
