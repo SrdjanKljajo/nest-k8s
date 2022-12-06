@@ -7,17 +7,19 @@ import {
   Patch,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { GetUser } from '../auth/decorator/get-user.decorator';
 import { JwtGuard } from '../auth/guard';
 import { EditUserDto } from './dto';
 import { UserService } from './user.service';
 
+@UseGuards(JwtGuard)
 @Controller('users')
+@ApiBearerAuth('access_token')
 export class UserController {
   constructor(private userService: UserService) {}
   @Get('me')
-  @UseGuards(JwtGuard)
   getMe(@GetUser() user: User) {
     return user;
   }
